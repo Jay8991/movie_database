@@ -1,0 +1,38 @@
+create table movies(
+	movie_id serial primary key,
+	movie_name varchar(100),
+	genre varchar(100),
+	rating varchar(50),
+	release_date date,
+	price float
+)
+
+create table tickets(
+	ticket_id serial primary key,
+	movie_id integer,
+	total_tickets integer,
+	foreign key(movie_id) references movies(movie_id)
+)
+
+create table customers(
+	customer_id serial primary key,
+	ticket_id integer,
+	first_name varchar(100),
+	last_name varchar(100),
+	age integer,
+	foreign key(ticket_id) references tickets(ticket_id)
+)
+
+create table concessions(
+	concession_id serial primary key,
+	customer_id integer,
+	foreign key(customer_id) references customers(customer_id)
+)
+
+create table foods(
+	food_id serial primary key,
+	concession_id integer,
+	food_name varchar(100),
+	price float,
+	foreign key(concession_id) references concessions(concession_id)
+)
